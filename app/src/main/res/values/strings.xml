@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Randomer</string>
+    <string name="getRandomButtonTitle">Get random</string>
+    <string name="randomNumberTextViewTitle">R</string>
 </resources>
