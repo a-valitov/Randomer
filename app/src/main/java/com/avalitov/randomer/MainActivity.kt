@@ -10,12 +10,11 @@ class MainActivity : AppCompatActivity() {
 
     internal lateinit var getRandomButton: Button
     internal lateinit var randomNumberTextView: TextView
+    private var random: Int = 0
 
-//    companion object Default : Random() {
-//        override fun nextBits(bitCount: Int): Int {
-//            TODO("Not yet implemented")
-//        }
-//    }
+    companion object {
+        private const val RANDOM_KEY = "RANDOM_KEY"               //is needed to save instance state
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +26,24 @@ class MainActivity : AppCompatActivity() {
         getRandomButton.setOnClickListener() { view ->
             getNewRandom()
         }
+
+        if(savedInstanceState != null) {
+            random = savedInstanceState.getInt(RANDOM_KEY)
+            randomNumberTextView.text = random.toString()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt(RANDOM_KEY, random)
     }
 
     private fun getNewRandom() {
-        var random = Random.nextInt(1,101)
+        random = Random.nextInt(1,101)
         randomNumberTextView.text = random.toString()
     }
+
+
 
 }
