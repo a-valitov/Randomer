@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
 
     internal lateinit var getRandomButton: Button
     internal lateinit var randomNumberTextView: TextView
-    private var random: Int = 0
+    var random: Int = 0
 
     companion object {
         private const val RANDOM_KEY = "RANDOM_KEY"               //is needed to save instance state
@@ -23,8 +23,11 @@ class MainActivity : AppCompatActivity() {
         getRandomButton = findViewById(R.id.getRandomButton)
         randomNumberTextView = findViewById(R.id.randomNumberTextView)
 
+        val randomGeneratorInstance = RandomGenerator()
+
         getRandomButton.setOnClickListener() { view ->
-            getNewRandom()
+            random = randomGeneratorInstance.getNewRandom(1, 101)
+            randomNumberTextView.text = random.toString()
         }
 
         if(savedInstanceState != null) {
@@ -38,12 +41,5 @@ class MainActivity : AppCompatActivity() {
 
         outState.putInt(RANDOM_KEY, random)
     }
-
-    private fun getNewRandom() {
-        random = Random.nextInt(1,101)
-        randomNumberTextView.text = random.toString()
-    }
-
-
 
 }
