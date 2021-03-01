@@ -6,12 +6,11 @@ import android.widget.Button
 import android.widget.TextView
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RandomGenerator {
 
     internal lateinit var getRandomButton: Button
     internal lateinit var randomNumberTextView: TextView
     private var random: Int = 0
-    var randomGeneratorInstance = RandomGenerator()
 
     companion object {
         private const val RANDOM_KEY = "RANDOM_KEY"               //is needed to save instance state
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         randomNumberTextView = findViewById(R.id.randomNumberTextView)
 
         getRandomButton.setOnClickListener() { view ->
-            random = randomGeneratorInstance.getNewRandom(1, 101)
+            random = getNewRandom(1, 101)
             randomNumberTextView.text = random.toString()
         }
 
